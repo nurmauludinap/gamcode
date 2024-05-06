@@ -3,6 +3,7 @@ import { CheckCircle, XCircle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { lessons } from "@/db/schema";
 
 type Props = {
   onCheck: () => void;
@@ -30,13 +31,13 @@ export const Footer = ({
         {status === "correct" && (
           <div className="text-green-500 font-bold text-base lg:text-2xl flex items-center">
             <CheckCircle className="h-6 w-6 lg:h-10 lg:w-10 mr-4"/>
-            Nicely done!
+            Kamu benar, Good job!
           </div>
         )}
         {status === "wrong" && (
           <div className="text-rose-500 font-bold text-base lg:text-2xl flex items-center">
             <XCircle className="h-6 w-6 lg:h-10 lg:w-10 mr-4"/>
-            Try again.
+            Oh tidak! kamu salah. Ayo coba lagi!
           </div>
         )}
         {status === "completed" && (
@@ -45,7 +46,7 @@ export const Footer = ({
             size={isMobile ? "sm" : "lg"}
             onClick={() => window.location.href = `/lesson/${lessonId}`}
           >
-            Practice again
+            Belajar lagi
           </Button>
         )}
         <Button

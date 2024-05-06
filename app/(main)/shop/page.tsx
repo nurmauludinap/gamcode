@@ -30,6 +30,7 @@ const ShopPage = async () => {
           hearts={userProgress.hearts}
           points={userProgress.points}
           hasActiveSubscription={false}
+          level={userProgress.level}
         />
         <Quests points={userProgress.points}/>
       </StickyWrapper>
@@ -45,7 +46,7 @@ const ShopPage = async () => {
             Shop
           </h1>
           <p className="text-muted-foreground text-center text-lg mb-6">
-            Spend your points on cool stuff.
+            Belanjakan poinmu untuk hal-hal menarik.
           </p>
           <Items
             hearts={userProgress.hearts}

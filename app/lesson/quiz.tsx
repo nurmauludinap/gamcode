@@ -89,6 +89,11 @@ export const Quiz = ({
     const onContinue = () => {
         if (!selectedOption) return;
 
+        if (!challengeOptions) {
+            onNext();
+            setStatus("none");
+        }
+
         if (status === "wrong") {
             setStatus("none");
             setSelectedOption(undefined);
@@ -176,7 +181,7 @@ export const Quiz = ({
                         width={50}
                     />
                     <h1 className="text-xl lg:text-3xl font-bold text-neutral-700">
-                        Great job! <br/> You&apos;ve completed the lesson.
+                        Great job! <br/> Kamu telah menyelesaikan materi ini.
                     </h1>
                     <div className="flex items-center gap-x-4 w-full">
                         <ResultCard
@@ -199,7 +204,7 @@ export const Quiz = ({
     }
 
     const title = currentChallenge.type === "ASSIST" 
-    ? "Select the correct meaning"
+    ? "Pilih jawaban yang benar"
     : currentChallenge.question;
 
     return (
@@ -213,8 +218,8 @@ export const Quiz = ({
            />
            <div className="flex-1">
                 <div className="h-full flex items-center justify-center">
-                    <div className="lg:min-h-[350px] lg:w-[600px] w-full px-6 lg:px-0 flex flex-col gap-y-12">
-                        <h1 className="text-lg lg:text-3xl text-center lg:text-start font-bold text-neutral-700">
+                    <div className="lg:min-h-[350px] lg:w-[800px] w-full px-6 lg:px-0 flex flex-col gap-y-12">
+                        <h1 className="text-lg lg:text-2xl text-center lg:text-start text-neutral-700">
                             {title}    
                         </h1> 
                         <div>

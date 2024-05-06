@@ -42,8 +42,8 @@ export const Items = ({
           width={60}
         />
         <div className="flex-1">
-          <p className="text-neutral-700 text-base lg:text-xl font-bold">
-            Refill Hearts
+          <p className="text-neutral-700 text-base lg:text-lg font-bold">
+            Beli Hati
           </p>
         </div>
         <Button
@@ -55,7 +55,7 @@ export const Items = ({
           }
         >
           {hearts === 5
-            ? "full"
+            ? "penuh"
             : (
               <div className="flex items-center">
                 <Image
@@ -64,7 +64,7 @@ export const Items = ({
                   height={20}
                   width={20}
                 />
-                <p>
+                <p className="p-1">
                   {POINTS_TO_REFILL}
                 </p>
               </div>

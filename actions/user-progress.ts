@@ -1,6 +1,6 @@
 "use server";
 
-import { POINTS_TO_REFILL } from "@/constants";
+import { POINTS_TO_REFILL, POINTS_PER_LEVEL } from "@/constants";
 import db from "@/db/drizzle";
 import { getCourseById, getUserProgress } from "@/db/queries";
 import { challengeProgress, challenges, userProgress } from "@/db/schema";
@@ -94,8 +94,6 @@ export const reduceHearts = async (challengeId: number) => {
         throw new Error("User progress not found");
     }
 
-    // Handle subscription
-
     if (currentUserProgress.hearts === 0) {
         return { error: "hearts" };
     }
@@ -136,3 +134,30 @@ export const refillHearts = async () => {
     revalidatePath("/quests");
     revalidatePath("/leaderboard");
 };
+
+export const userLevel = async () => {
+    const currentUserProgress = await getUserProgress();
+
+    if (!currentUserProgress) {
+        throw new Error("User progress not found");
+    }
+
+    const calculatedLevel = Math.floor(currentUserProgress.points / POINTS_PER_LEVEL);
+    
+    if (calculatedLevel === 1) {
+        currentUserProgress.level = 1;
+    }
+
+    if (calculatedLevel > currentUserProgress.level) {
+        currentUserProgress.level = calculatedLevel;
+    } 
+
+    await db.update(userProgress).set({
+        level: currentUserProgress.level
+    }).where(eq(userProgress.userId, currentUserProgress.userId));
+
+    revalidatePath("/learn");
+    revalidatePath("/shop");
+    revalidatePath("/quests");
+    revalidatePath("/leaderboard");
+}

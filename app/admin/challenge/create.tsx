@@ -5,8 +5,8 @@ export const ChallengeCreate = () => {
     <Create>
     <SimpleForm>
       <TextInput 
-        source="question" 
-        validate={[required()]} 
+        source="question"  
+        validate={[required()]}
         label="Question"
       />
       <SelectInput

@@ -39,14 +39,14 @@ const main = async () => {
         .values([
           {
             courseId: course.id,
-            title: "Unit 1",
+            title: "Bagian 1",
             description: `Dasar ${course.title}`,
             order: 1,
           },
           {
             courseId: course.id,
-            title: "Unit 2",
-            description: `Learn intermediate ${course.title}`,
+            title: "Bagian 2",
+            description: `Tahapan dan Contoh ${course.title}`,
             order: 2,
           },
         ])
@@ -61,7 +61,7 @@ const main = async () => {
             { unitId: unit.id, title: "Dekomposisi", order: 2 },
             { unitId: unit.id, title: "Pengenalan Pola", order: 3 },
             { unitId: unit.id, title: "Abstraksi", order: 4 },
-            { unitId: unit.id, title: "Algoritma", order: 5 },
+            // { unitId: unit.id, title: "Algoritma", order: 5 },
           ])
           .returning();
 
@@ -73,51 +73,69 @@ const main = async () => {
               {
                 lessonId: lesson.id,
                 type: "SELECT",
-                question: 'Computational Thinking berasal dari kata?',
+                question: 'Komputasi memiliki makna?',
                 order: 1,
               },
               {
                 lessonId: lesson.id,
                 type: "SELECT",
-                question: 'Which one of these is "the woman"?',
+                question: 'Yang bukan merupakan tujuan dari Computational Thinking dalam melatih otak adalah...',
                 order: 2,
               },
               {
                 lessonId: lesson.id,
                 type: "SELECT",
-                question: 'Which one of these is "the boy"?',
+                question: 'Bahasa Indonesia dari Computational Thinking adalah...',
                 order: 3,
               },
               {
                 lessonId: lesson.id,
-                type: "ASSIST",
-                question: '"the man"',
+                type: "SELECT",
+                question: 'Komputasi memiliki makna?',
                 order: 4,
               },
               {
                 lessonId: lesson.id,
                 type: "SELECT",
-                question: 'Which one of these is "the zombie"?',
+                question: 'Yang bukan merupakan tujuan dari Computational Thinking dalam melatih otak adalah...',
                 order: 5,
               },
               {
                 lessonId: lesson.id,
                 type: "SELECT",
-                question: 'Which one of these is "the robot"?',
+                question: 'Bahasa Indonesia dari Computational Thinking adalah...',
                 order: 6,
               },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the girl"?',
-                order: 7,
-              },
-              {
-                lessonId: lesson.id,
-                type: "ASSIST",
-                question: '"the zombie"',
-                order: 8,
-              },
+              // {
+              //   lessonId: lesson.id,
+              //   type: "ASSIST",
+              //   question: '"the man"',
+              //   order: 4,
+              // },
+              // {
+              //   lessonId: lesson.id,
+              //   type: "SELECT",
+              //   question: 'Which one of these is "the zombie"?',
+              //   order: 5,
+              // },
+              // {
+              //   lessonId: lesson.id,
+              //   type: "SELECT",
+              //   question: 'Which one of these is "the robot"?',
+              //   order: 6,
+              // },
+              // {
+              //   lessonId: lesson.id,
+              //   type: "SELECT",
+              //   question: 'Which one of these is "the girl"?',
+              //   order: 7,
+              // },
+              // {
+              //   lessonId: lesson.id,
+              //   type: "ASSIST",
+              //   question: '"the zombie"',
+              //   order: 8,
+              // },
             ])
             .returning();
 
@@ -127,25 +145,28 @@ const main = async () => {
               await db.insert(schema.challengeOptions).values([
                 {
                   challengeId: challenge.id,
-                  correct: true,
-                  text: "next",
-                  // imageSrc: "/man.svg",
+                  correct: false,
+                  text: "Media Online",
                   audioSrc: "/bling.mp3",
                 },
-                // {
-                //   challengeId: challenge.id,
-                //   correct: false,
-                //   text: "la mujer",
-                //   imageSrc: "/woman.svg",
-                //   audioSrc: "/bling.mp3",
-                // },
-                // {
-                //   challengeId: challenge.id,
-                //   correct: false,
-                //   text: "el chico",
-                //   imageSrc: "/boy.svg",
-                //   audioSrc: "/bling.mp3",
-                // },
+                {
+                  challengeId: challenge.id,
+                  correct: true,
+                  text: "Pemecahan Masalah",
+                  audioSrc: "/bling.mp3",
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: "Penimbun Masalah",
+                  audioSrc: "/bling.mp3",
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: "Internet Sistem",
+                  audioSrc: "/bling.mp3",
+                },
               ]);
             }
 
@@ -153,23 +174,26 @@ const main = async () => {
               await db.insert(schema.challengeOptions).values([
                 {
                   challengeId: challenge.id,
-                  correct: true,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
+                  correct: false,
+                  text: "Melatih untuk bisa berpikir secara Logis",
                   audioSrc: "/bling.mp3",
                 },
                 {
                   challengeId: challenge.id,
                   correct: false,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
+                  text: "Melatih untuk bisa berpikir secara Terstruktur",
                   audioSrc: "/bling.mp",
                 },
                 {
                   challengeId: challenge.id,
+                  correct: true,
+                  text: "Melatih untuk bisa berpikir secara Kaku dan Manja",
+                  audioSrc: "/bling.mp3",
+                },
+                {
+                  challengeId: challenge.id,
                   correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
+                  text: "Melatih untuk bisa berpikir secara Kreatif",
                   audioSrc: "/bling.mp3",
                 },
               ]);
@@ -179,23 +203,26 @@ const main = async () => {
               await db.insert(schema.challengeOptions).values([
                 {
                   challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
-                  audioSrc: "/bling.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/bling.mp3",
-                },
-                {
-                  challengeId: challenge.id,
                   correct: true,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
+                  text: "Berpikir komputasi",
+                  audioSrc: "/bling.mp3",
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: "Komputer jaringan",
+                  audioSrc: "/bling.mp3",
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: "CCTV",
+                  audioSrc: "/bling.mp3",
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: "Perumitan Masalah",
                   audioSrc: "/bling.mp3",
                 },
               ]);
@@ -206,19 +233,25 @@ const main = async () => {
                 {
                   challengeId: challenge.id,
                   correct: false,
-                  text: "la mujer",
+                  text: "Media Online",
                   audioSrc: "/bling.mp3",
                 },
                 {
                   challengeId: challenge.id,
                   correct: true,
-                  text: "el hombre",
+                  text: "Pemecahan Masalah",
                   audioSrc: "/bling.mp3",
                 },
                 {
                   challengeId: challenge.id,
                   correct: false,
-                  text: "el chico",
+                  text: "Penimbun Masalah",
+                  audioSrc: "/bling.mp3",
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: "Internet Sistem",
                   audioSrc: "/bling.mp3",
                 },
               ]);
@@ -229,22 +262,25 @@ const main = async () => {
                 {
                   challengeId: challenge.id,
                   correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
+                  text: "Melatih untuk bisa berpikir secara Logis",
                   audioSrc: "/bling.mp3",
                 },
                 {
                   challengeId: challenge.id,
                   correct: false,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
-                  audioSrc: "/bling.mp3",
+                  text: "Melatih untuk bisa berpikir secara Terstruktur",
+                  audioSrc: "/bling.mp",
                 },
                 {
                   challengeId: challenge.id,
                   correct: true,
-                  text: "el zombie",
-                  imageSrc: "/zombie.svg",
+                  text: "Melatih untuk bisa berpikir secara Kaku dan Manja",
+                  audioSrc: "/bling.mp3",
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: "Melatih untuk bisa berpikir secara Kreatif",
                   audioSrc: "/bling.mp3",
                 },
               ]);
@@ -255,79 +291,33 @@ const main = async () => {
                 {
                   challengeId: challenge.id,
                   correct: true,
-                  text: "el robot",
-                  imageSrc: "/robot.svg",
+                  text: "Berpikir komputasi",
                   audioSrc: "/bling.mp3",
                 },
                 {
                   challengeId: challenge.id,
                   correct: false,
-                  text: "el zombie",
-                  imageSrc: "/zombie.svg",
+                  text: "Komputer jaringan",
                   audioSrc: "/bling.mp3",
                 },
                 {
                   challengeId: challenge.id,
                   correct: false,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
+                  text: "CCTV",
+                  audioSrc: "/bling.mp3",
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: "Perumitan Masalah",
                   audioSrc: "/bling.mp3",
                 },
               ]);
-            }
-
-            if (challenge.order === 7) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "la nina",
-                  imageSrc: "/girl.svg",
-                  audioSrc: "/bling.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el zombie",
-                  imageSrc: "/zombie.svg",
-                  audioSrc: "/bling.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/bling.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 8) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  audioSrc: "/bling.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el zombie",
-                  audioSrc: "/bling.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  audioSrc: "/bling.mp3boy.mp3",
-                },
-              ]);
-            }
-          }
-        }
-      }
-    }
+            }; 
+          };
+        };
+      };
+    };
     console.log("Database seeded successfully");
   } catch (error) {
     console.error(error);

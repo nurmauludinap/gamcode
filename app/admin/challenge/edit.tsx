@@ -5,7 +5,7 @@ export const ChallengeEdit = () => {
     <Edit>
     <SimpleForm>
       <TextInput 
-        source="question" 
+        source="question"
         validate={[required()]} 
         label="Question"
       />

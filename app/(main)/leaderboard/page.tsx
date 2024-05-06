@@ -13,7 +13,7 @@ import { Quests } from "@/components/quests";
 const LeaderboardPage = async () => {
   const userProgressData = getUserProgress();
   const leaderboardData = getTopTenUsers();
-
+  
   const [
     userProgress,
     leaderboard,
@@ -26,6 +26,8 @@ const LeaderboardPage = async () => {
     redirect("/courses");
   }
 
+  const currentUserRank = leaderboard.findIndex(user => user.userId === userProgress.userId);
+
   return ( 
     <div className="flex flex-row-reverse gap-[48px] px-6">
       <StickyWrapper>
@@ -34,6 +36,7 @@ const LeaderboardPage = async () => {
           hearts={userProgress.hearts}
           points={userProgress.points}
           hasActiveSubscription={false}
+          level={userProgress.level}
         />
         <Quests points={userProgress.points}/>
       </StickyWrapper>
@@ -49,7 +52,7 @@ const LeaderboardPage = async () => {
             Leaderboard
           </h1>
           <p className="text-muted-foreground text-center text-lg mb-6">
-            See where you stand among other learners in the class.
+            Lihat posisi kamu di antara siswa lainnya.
           </p>
           <Separator className="mb-4 h-0.5 rounded-full"/>
           {leaderboard.map((userProgress, index
@@ -58,11 +61,13 @@ const LeaderboardPage = async () => {
             key={userProgress.userId}
             className="flex items-center w-full p-2 px-4 rounded-xl hover:bg-gray-200/50"
             >
-              <p className="font-bold text-lime-700 mr-4">
-                {index + 1}
+              <p className="font-bold text-peach relative">
+                <span className="rounded-full bg-peach text-white w-8 h-8 flex items-center justify-center mr-2">
+                  {index + 1}
+                </span>
               </p>
               <Avatar
-                className="border bg-green-500 h-12 w-12 ml-3 mr-6"
+                className="border bg-darkenBlue h-12 w-12 ml-3 mr-5"
               >
                 <AvatarImage
                   src={userProgress.userImageSrc}
@@ -77,6 +82,34 @@ const LeaderboardPage = async () => {
               </p>
             </div>
           ))}
+          <Separator className="mt-4 mb-4 h-0.5 rounded-full"/>
+          <p className="text-muted-foreground text-center text-lg mt-2 mb-1">
+            Posisi kamu
+          </p>
+          <div 
+            key={userProgress.userId}
+            className="flex items-center w-full p-2 px-4 rounded-xl hover:bg-gray-200/50"
+            >
+              <p className="font-bold text-peach relative">
+                <span className="rounded-full bg-peach text-white w-8 h-8 flex items-center justify-center mr-2">
+                {currentUserRank + 1}
+                </span>
+              </p>
+              <Avatar
+                className="border bg-darkenBlue h-12 w-12 ml-3 mr-5"
+              >
+                <AvatarImage
+                  src={userProgress.userImageSrc}
+                  className="object-cover"
+                />
+              </Avatar>
+              <p className="font-bold text-neutral-800 flex-1">
+                {userProgress.userName}
+              </p>
+              <p className="text-muted-foreground">
+                {userProgress.points} XP
+              </p>
+            </div>
         </div>
       </FeedWrapper>
     </div>

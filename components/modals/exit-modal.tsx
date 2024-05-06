@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useExitModal } from "@/store/use-exit-modal";
+import { userLevel } from "@/actions/user-progress";
 
 export const ExitModal = () => {
     const router = useRouter();
@@ -39,10 +40,10 @@ export const ExitModal = () => {
                         />
                     </div>
                     <DialogTitle className="text-center font-bold text-2xl">
-                        Wait, don&apos;t go!
+                        Tunggu, jangan pergi!
                     </DialogTitle>
                     <DialogDescription className="text-center text-base">
-                        You&apos;re about to leave the lesson. Are you sure?
+                        Kamu akan meninggalkan sesi belajar. Apakah kamu yakin?
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="mb-4">
@@ -53,7 +54,7 @@ export const ExitModal = () => {
                             size="lg"
                             onClick={close}
                         >
-                            Keep learning
+                            Lanjut belajar
                         </Button>
                         <Button 
                             variant="dangerOutline" 
@@ -64,7 +65,7 @@ export const ExitModal = () => {
                                 router.push("/learn");
                             }}
                         >
-                            End session
+                            Tinggalkan sesi
                         </Button>
                     </div>
                 </DialogFooter>

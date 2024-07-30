@@ -1,4 +1,4 @@
-export const POINTS_TO_REFILL = 10;
+export const POINTS_TO_REFILL = 100;
 
 export const POINTS_PER_LEVEL = 10;
 

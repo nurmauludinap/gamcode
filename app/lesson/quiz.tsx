@@ -204,8 +204,14 @@ export const Quiz = ({
     }
 
     const title = currentChallenge.type === "ASSIST" 
-    ? "Pilih jawaban yang benar"
+    ? "Perhatikan pernyataan berikut ini. Pilih True jika benar, False jika salah."
     : currentChallenge.question;
+
+    const image1 = currentChallenge.imageSrc1;
+    const image2 = currentChallenge.imageSrc2;
+    const image3 = currentChallenge.imageSrc3;
+    const image4 = currentChallenge.imageSrc4;
+    const image5 = currentChallenge.imageSrc5;
 
     return (
         <>
@@ -218,10 +224,70 @@ export const Quiz = ({
            />
            <div className="flex-1">
                 <div className="h-full flex items-center justify-center">
-                    <div className="lg:min-h-[350px] lg:w-[800px] w-full px-6 lg:px-0 flex flex-col gap-y-12">
+                    <div className="lg:min-h-[350px] lg:w-[800px] w-full px-6 lg:px-0 flex flex-col gap-y-4">
+                        <h1 className="text-neutral-700 text-justify">
+                            {currentChallenge.description1}    
+                        </h1>
+                        {image1 && (
+                            <Image 
+                            src={image1}
+                            alt="Gambar 1"
+                            height={360}
+                            width={360}
+                            className="items-center"
+                        /> 
+                        )}
+                        <h1 className="text-neutral-700 text-justify">
+                            {currentChallenge.description2}    
+                        </h1>
+                        {image2 && (
+                            <Image 
+                            src={image2}
+                            alt="Gambar 2"
+                            height={360}
+                            width={360}
+                            className="items-center"
+                        /> 
+                        )}
+                        <h1 className="text-neutral-700 text-justify">
+                            {currentChallenge.description3}    
+                        </h1>
+                        {image3 && (
+                            <Image 
+                            src={image3}
+                            alt="Gambar 3"
+                            height={360}
+                            width={360}
+                            className="items-center"
+                        /> 
+                        )}
+                        <h1 className="text-neutral-700 text-justify">
+                            {currentChallenge.description4}    
+                        </h1>
+                        {image4 && (
+                            <Image 
+                            src={image4}
+                            alt="Gambar 4"
+                            height={360}
+                            width={360}
+                            className="items-center"
+                        /> 
+                        )}
+                        <h1 className="text-neutral-700 text-justify">
+                            {currentChallenge.description5}    
+                        </h1>
+                        {image5 && (
+                            <Image 
+                            src={image5}
+                            alt="Gambar 5"
+                            height={360}
+                            width={360}
+                            className="items-center"
+                        /> 
+                        )}
                         <h1 className="text-neutral-700 text-justify">
                             {title}    
-                        </h1> 
+                        </h1>
                         <div>
                             {currentChallenge.type === "ASSIST" && (
                                 <QuestionBubble question={currentChallenge.question}/>

@@ -50,6 +50,16 @@ export const challenges = pgTable("challenges", {
     lessonId: integer("lesson_id").references(() => lessons.id, { onDelete: "cascade" }).notNull(),
     type: challengesEnum("type").notNull(),
     question: text("question").notNull(),
+    description1: text("description_1"),
+    description2: text("description_2"),
+    description3: text("description_3"),
+    description4: text("description_4"),
+    description5: text("description_5"),
+    imageSrc1: text("image_src_1"),
+    imageSrc2: text("image_src_2"),
+    imageSrc3: text("image_src_3"),
+    imageSrc4: text("image_src_4"),
+    imageSrc5: text("image_src_5"),
     order: integer("order").notNull(),
 });
 

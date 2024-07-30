@@ -9,93 +9,7 @@ const db = drizzle(sql, { schema });
 
 const main = async () => {
   try {
-    console.log("Seeding database");
-
-    await db.delete(schema.courses);
-    await db.delete(schema.userProgress);
-    await db.delete(schema.units);
-    await db.delete(schema.lessons);
-    await db.delete(schema.challenges);
-    await db.delete(schema.challengeOptions);
-    await db.delete(schema.challengeProgress);
-
-
-    const courses = await db
-    .insert(schema.courses)
-    .values([
-      {id: 1, title: "Array dan String", imageSrc: "/bahasa_pemrograman.svg"},
-    ]);
-
-    const units = await db
-    .insert(schema.units)
-    .values([
-      {
-        id: 1,
-        courseId: 1,
-        title: "Bagian 1",
-        description: "Konsep Dasar Array",
-        order: 1,
-      },
-      {
-        id: 2,
-        courseId: 1,
-        title: "Bagian 2",
-        description: "Penggunaan Array dalam Program",
-        order: 2,
-      },
-      {
-        id: 3,
-        courseId: 1,
-        title: "Bagian 3",
-        description: "Konsep Dasar Karakter dan String",
-        order: 3,
-      },
-      {
-        id: 4,
-        courseId: 1,
-        title: "Bagian 4",
-        description: "Penggunaan Karakter dan String dalam Program",
-        order: 4,
-      },
-    ]);
-
-    const lessons = await db
-    .insert(schema.lessons)
-    .values([
-      // Lesson untuk Unit 1 (3 bintang)
-      {
-        id: 1,
-        unitId: 1,
-        order: 1,
-        title: "Konsep Dasar Array",
-      },
-      {
-        id: 2,
-        unitId: 1, 
-        order: 2,
-        title: "Array 1 dimensi",
-      },
-      {
-        id: 3,
-        unitId: 1, 
-        order: 3,
-        title: "Array 2 dimensi",
-      },
-      
-      // Lesson untuk Unit 2 (2 bintang)
-      {
-        id: 4,
-        unitId: 2,
-        order: 1,
-        title: "Analisis Array",
-      },
-      {
-        id: 5,
-        unitId: 2, 
-        order: 2,
-        title: "Analisis Program Array",
-      },
-    ]);
+    console.log("Inserting database");
 
     /* Soal untuk lesson 1 Unit 1 */
     const challenges = await db
@@ -334,10 +248,10 @@ const main = async () => {
       },
     ]);
 
-    console.log("Seeding finished");
+    console.log("Inserting finished");
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to seed the database");
+    throw new Error("Failed to insert the database");
   }
 };
 

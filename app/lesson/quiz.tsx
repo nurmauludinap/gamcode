@@ -25,7 +25,7 @@ type Props = {
         completed: boolean;
         challengeOptions: typeof challengeOptions.$inferSelect[];
     })[];
-    userSubscription: any; //Replace with subscription DB type
+    userSubscription: any; 
 };
 
 export const Quiz = ({
@@ -219,7 +219,7 @@ export const Quiz = ({
            <div className="flex-1">
                 <div className="h-full flex items-center justify-center">
                     <div className="lg:min-h-[350px] lg:w-[800px] w-full px-6 lg:px-0 flex flex-col gap-y-12">
-                        <h1 className="text-lg lg:text-2xl text-center lg:text-start text-neutral-700">
+                        <h1 className="text-neutral-700 text-justify">
                             {title}    
                         </h1> 
                         <div>

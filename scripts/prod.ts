@@ -59,9 +59,6 @@ const main = async () => {
           .values([
             { unitId: unit.id, title: "Definisi", order: 1 },
             { unitId: unit.id, title: "Dekomposisi", order: 2 },
-            { unitId: unit.id, title: "Pengenalan Pola", order: 3 },
-            { unitId: unit.id, title: "Abstraksi", order: 4 },
-            { unitId: unit.id, title: "Algoritma", order: 5 },
           ])
           .returning();
 

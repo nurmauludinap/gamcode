@@ -1,6 +1,6 @@
 export const POINTS_TO_REFILL = 100;
 
-export const POINTS_PER_LEVEL = 10;
+export const POINTS_PER_LEVEL = 40;
 
 export const firstQuests = [
   {

@@ -207,11 +207,21 @@ export const Quiz = ({
     ? "Perhatikan pernyataan berikut ini. Pilih True jika benar, False jika salah."
     : currentChallenge.question;
 
-    const image1 = currentChallenge.imageSrc1;
-    const image2 = currentChallenge.imageSrc2;
-    const image3 = currentChallenge.imageSrc3;
-    const image4 = currentChallenge.imageSrc4;
-    const image5 = currentChallenge.imageSrc5;
+    const descriptions = (currentChallenge.descriptions as string[]) ?? [];
+    const imageSrcs = (currentChallenge.imageSrcs as string[]) ?? [];
+
+    // Create a combined array with alternating items
+    const combinedItems = [];
+    const maxLength = Math.max(descriptions.length, imageSrcs.length);
+
+    for (let i = 0; i < maxLength; i++) {
+        if (i < descriptions.length) {
+            combinedItems.push({ type: 'description', content: descriptions[i] });
+        }
+        if (imageSrcs[i]) { // Check if the specific imageSrcs[i] is not null or undefined
+            combinedItems.push({ type: 'image', content: imageSrcs[i] });
+        }
+    }
 
     return (
         <>
@@ -225,67 +235,31 @@ export const Quiz = ({
            <div className="flex-1">
                 <div className="h-full flex items-center justify-center">
                     <div className="lg:min-h-[350px] lg:w-[800px] w-full px-6 lg:px-0 flex flex-col gap-y-4">
-                        <h1 className="text-neutral-700 text-justify">
-                            {currentChallenge.description1}    
+                        <h1 className="text-3xl mt-3 mb-1">
+                            {currentChallenge.title}
                         </h1>
-                        {image1 && (
-                            <Image 
-                            src={image1}
-                            alt="Gambar 1"
-                            height={360}
-                            width={360}
-                            className="items-center"
-                        /> 
-                        )}
-                        <h1 className="text-neutral-700 text-justify">
-                            {currentChallenge.description2}    
-                        </h1>
-                        {image2 && (
-                            <Image 
-                            src={image2}
-                            alt="Gambar 2"
-                            height={360}
-                            width={360}
-                            className="items-center"
-                        /> 
-                        )}
-                        <h1 className="text-neutral-700 text-justify">
-                            {currentChallenge.description3}    
-                        </h1>
-                        {image3 && (
-                            <Image 
-                            src={image3}
-                            alt="Gambar 3"
-                            height={360}
-                            width={360}
-                            className="items-center"
-                        /> 
-                        )}
-                        <h1 className="text-neutral-700 text-justify">
-                            {currentChallenge.description4}    
-                        </h1>
-                        {image4 && (
-                            <Image 
-                            src={image4}
-                            alt="Gambar 4"
-                            height={360}
-                            width={360}
-                            className="items-center"
-                        /> 
-                        )}
-                        <h1 className="text-neutral-700 text-justify">
-                            {currentChallenge.description5}    
-                        </h1>
-                        {image5 && (
-                            <Image 
-                            src={image5}
-                            alt="Gambar 5"
-                            height={360}
-                            width={360}
-                            className="items-center"
-                        /> 
-                        )}
-                        <h1 className="text-neutral-700 text-justify">
+                        {combinedItems.map((item, index) => {
+                            if (item.type === 'description') {
+                                return (
+                                    <h1 key={index} className="text-neutral-700 text-justify">
+                                        {item.content}
+                                    </h1>
+                                );
+                            } else if (item.type === 'image') {
+                                return (
+                                    <Image 
+                                        key={index}
+                                        src={item.content}
+                                        alt={`Gambar ${index + 1}`}
+                                        height={400}
+                                        width={400}
+                                        className="items-center"
+                                    />
+                                );
+                            }
+                            return null;
+                        })}
+                        <h1 className="mt-8 text-justify font-bold">
                             {title}    
                         </h1>
                         <div>

@@ -34,21 +34,21 @@ const main = async () => {
         courseId: 1,
         title: "Bagian 1",
         description: "Konsep Dasar Array",
-        order: 2,
+        order: 1,
       },
       {
         id: 2,
         courseId: 1,
         title: "Bagian 2",
         description: "Vector dan Array 2 Dimensi",
-        order: 3,
+        order: 2,
       },
       {
         id: 3,
         courseId: 1,
         title: "Bagian 3",
         description: "Konsep Dasar Karakter dan String",
-        order: 1,
+        order: 3,
       },
       {
         id: 4,
@@ -112,13 +112,32 @@ const main = async () => {
         id: 8,
         unitId: 3, 
         order: 2,
-        title: "Kuis Fungsi dalam Vector",
+        title: "Operasi Dasar String",
       },
+      // Lesson untuk Unit 4
       {
         id: 9,
-        unitId: 3, 
+        unitId: 4, 
+        order: 1,
+        title: "Latihan Dasar Array",
+      },
+      {
+        id: 10,
+        unitId: 4, 
+        order: 2,
+        title: "Program Array dan String",
+      },
+      {
+        id: 11,
+        unitId: 4, 
         order: 3,
-        title: "Array 2D dan Vector of Vectors",
+        title: "String",
+      },
+      {
+        id: 12,
+        unitId: 4, 
+        order: 4,
+        title: "Program Vector dan Array 2 Dimensi",
       },
     ]);
 
@@ -304,7 +323,7 @@ const main = async () => {
           "Disediakan kode program sebagai berikut:",
           "Berikut ini merupakan langkah-langkah penyelesaian dari contoh kasus program untuk mencari nilai maksimum dan minimum dari nilai inputan menggunakan array.",
           "1. Deklarasi variabel angka sebagai array yang dapat menampung 6 elemen. Deklarasi juga variabel maksimum dan minimum untuk menampung nilai terbesar dan terkecil.",
-          "2. Menerima 6 angka inputan menggunakan cin yang dilakukan berulang menggunakan perulangan.",
+          "2. Melakukan iterasi dan menerima 6 angka inputan menggunakan cin menggunakan perulangan.",
           "3. Menginisialisasi nilai maksimum dan minimum dengan array indeks ke-0 (angka ke-1).",
           "4. Membandingkan setiap elemen dengan elemen sebelumnya menggunakan perulangan dngan kondisi.",
           "5. Mencetak nilai maksimum dan minimum menggunakan cout.",
@@ -930,591 +949,863 @@ const main = async () => {
     ]);
 
     
-    // /* Soal untuk Unit 4 - Latihan Array dan String */
-    // const challenges4 = await db
-    // .insert(schema.challenges)
-    // .values([
-    //   {
-    //     id: 26,
-    //     lessonId: 7,
-    //     type: "SELECT",
-    //     order: 1,
-    //     title:"Karakter dan String",
-    //     descriptions: [
-    //       "Selain angka, masukan dari program dapat berupa karakter atau rangkaian karakter seperti kata. Hal ini telah lazim kalian temui, misalnya ketika mengetikkan kata kunci untuk melakukan pencarian di mesin pencari atau ketika kalian memasukkan kata sandi saat login. Oleh karena itu, program dilengkapi dengan kemampuan untuk membaca, menyimpan, mengolah, dan mencetak rangkaian karakter tersebut.",
-    //       "Rangkaian karakter tersebut dalam pemrograman disebut sebagai string. Definisi string dalam pemrograman adalah rangkaian karakter. Karakter sendiri merupakan suatu data berupa huruf, angka, simbol, dan karakter lain yang mengikuti suatu standar tertentu seperti “American Standard Code for Information Interchange” (ASCII) atau Unicode:",
-    //       "Karakter adalah unit terkecil dari teks yang dapat ditampilkan atau diproses oleh komputer. Dalam C++, karakter direpresentasikan oleh tipe data char.",
-    //       "Contoh: 'A', 'b', '1', '@', '#'",
-    //       "String adalah kumpulan karakter yang diatur dalam urutan tertentu. Dalam C++, string dapat direpresentasikan menggunakan array karakter atau menggunakan kelas std::string.",
-    //       'Contoh: "Hello", "12345", "C++ Programming"',
-    //     ],
-    //     imageSrcs: [
-    //       "",
-    //       "/string/string_materi_1.png",
-    //     ],
-    //     question: `Apakah string merupakan tipe data yang dapat menerima inputan angka (int)?`,
-    //   },
-    //   {
-    //     id: 27,
-    //     lessonId: 7,
-    //     type: "SELECT",
-    //     order: 2,
-    //     title:"Deklarasi dan Inisialisasi",
-    //     descriptions: [
-    //       "Di C++, deklarasi variabel char dan string cukup sederhana. Berikut adalah contoh bagaimana mendeklarasikan dan menginisialisasi variabel char dan string di C++.",
-    //       "Deklarasi dan inisialisasi char:",
-    //       "Deklarasi dan inisialisasi string:",
-    //       "Jangan lupa untuk selalu mengimport library string di awal kode ketika kamu menggunakan string di C++, seperti ini:",
-    //     ],
-    //     imageSrcs: [
-    //       "",
-    //       "/string/string_materi_12.png",
-    //       "/string/string_materi_13.png",
-    //       "/string/string_materi_14.png",
-    //     ],
-    //     question: 'Jika kita menginisialisasikan char, apakah dapat menggunakan tanda petik ganda (")?',
-    //   },
-    //   {
-    //     id: 28,
-    //     lessonId: 7,
-    //     type: "SELECT",
-    //     order: 3,
-    //     descriptions: [
-    //       "Ada beberapa cara yang lazim digunakan untuk mengimplementasikan string dalam pemrograman. Pada bahasa C, string diimplementasikan sebagai array karakter yang diakhiri oleh karakter ‘\0’. Dengan kata lain, kalian dapat membuat dan memproses suatu string seperti halnya kalian mengolah array.",
-    //       "Bahasa pemrograman lain seperti C++ atau Java memilih sebuah tipe data string sendiri yang menyembunyikan beberapa detail terkait pengelolaan data string yang dilakukan oleh program. Karena proses pada string berbeda dengan proses pada bilangan, untuk itu bahasa pemrograman telah dilengkapi dengan fungsi-fungsi untuk mengolah karakter dan string.",
-    //       "Misalnya untuk melakukan konversi dari huruf kapital ke non kapital, penggabungan string, pencarian substring, dan berbagai fungsi lainnya. Pada bahasa C, kalian dapat akses fungsi-fungsi tersebut pada pustaka.",
-    //       "Diberikan sebuah kode program C++ yang menerima inputan string berikut ini:",         
-    //     ],
-    //     imageSrcs: [
-    //       "",
-    //       "",
-    //       "",
-    //       "/string/string_materi_2.png",
-    //     ],
-    //     question: `Berdasarkan kode di atas, apa yang dilakukan program setelah menerima inputan string menggunakan cin?`,
-    //   },
-    //   {
-    //     id: 29,
-    //     lessonId: 7,
-    //     type: "SELECT",
-    //     order: 4,
-    //     descriptions: [
-    //       "Contoh lain, diberikan sebuah kode program C++ yang mempunyai function lowerCase() dimana program menerima inputan string berikut ini:",         
-    //     ],
-    //     imageSrcs: [
-    //       "/string/string_materi_3.png",
-    //     ],
-    //     question: `Berdasarkan kode di atas, apa yang dilakukan program pada line 17 sampai 19?`,
-    //   },
-    //   {
-    //     id: 30,
-    //     lessonId: 7,
-    //     type: "SELECT",
-    //     order: 5,
-    //     descriptions: [
-    //       null,         
-    //     ],
-    //     imageSrcs: [
-    //       "/string/string_materi_3.png",
-    //     ],
-    //     question: `Berdasarkan kode di atas, apa yang terjadi jika string yang diinputkan merupakan 'sToP'?`,
-    //   },
-    //   {
-    //     id: 31,
-    //     lessonId: 8,
-    //     type: "SELECT",
-    //     order: 1,
-    //     title: "Operasi Dasar",
-    //     descriptions: [
-    //       "Ada beberapa operasi dasar pada string yang melibatkan berbagai manipulasi dan pemrosesan data teks. Beberapa operasi dasar yang sering digunakan antara lain:",
-    //       "1. Penggabungan (Concatenation): Menggabungkan dua atau lebih string menjadi satu string menggunakan operator + atau append().",
-    //       "2. Pengambilan Substring: Mengambil sebagian dari string berdasarkan indeks mulai dan panjang substring.",
-    //       "3. Perbandingan (Comparison): Membandingkan dua string untuk menentukan urutan leksikografis atau kesamaan menggunakan operator perbandingan (==, !=, <, >).",
-    //       "4. Panjang string: Menentukan jumlah karakter dalam string enggunakan fungsi size() atau length().",     
-    //     ],
-    //     imageSrcs: [
-    //       "",
-    //       "/string/string_materi_4.png",
-    //       "/string/string_materi_5.png",
-    //       "/string/string_materi_6.png",
-    //       "/string/string_materi_7.png",
-    //     ],
-    //     question: `Apakah sebuah string dapat digabungkan dengan int secara langsung?`,
-    //   },
-    //   {
-    //     id: 32,
-    //     lessonId: 8,
-    //     type: "SELECT",
-    //     order: 2,
-    //     title: "Operasi Dasar",
-    //     descriptions: [
-    //       "5. Pencarian (Search): Mencari keberadaan substring dalam string dan mengembalikan indeks kemunculannya.",
-    //       "6. Penggantian (Replace): Mengganti bagian dari string dengan string lain.",
-    //       "7. Penghapusan (Erase): Menghapus bagian dari string berdasarkan indeks dan panjangnya.",
-    //       "8. Mengakses Elemen: Menggunakan indeks seperti array (str[index]).",
-    //     ],
-    //     imageSrcs: [
-    //       "/string/string_materi_8.png",
-    //       "/string/string_materi_9.png",
-    //       "/string/string_materi_10.png",
-    //       "/string/string_materi_11.png",
-    //     ],
-    //     question: `Jika pada penghapusan str.erase(5, 7) diganti menjadi str.erase(0, 7), maka outputnya adalah...`,
-    //   },
-    //   {
-    //     id: 33,
-    //     lessonId: 8, 
-    //     type: "ASSIST",
-    //     order: 3,
-    //     question: 'Perintah .length() digunakan untuk menggabungkan beberapa string.',
-    //   },  
-    //   {
-    //     id: 34,
-    //     lessonId: 8, 
-    //     type: "ASSIST",
-    //     order: 4,
-    //     question: 'Kita bisa mengakses elemen string dengan menggunakan nama_variabel[index].',
-    //   },
-    //   {
-    //     id: 35,
-    //     lessonId: 8, 
-    //     type: "SELECT",
-    //     order: 5,
-    //     imageSrcs: [
-    //       "/string/string_materi_15.png",
-    //     ],
-    //     question: 'Output dari kode program di atas adalah...',
-    //   },        
-    // ]);
+    /* Soal untuk Unit 3 - Konsep Dasar Karakter dan String */
+    const challenges4 = await db
+    .insert(schema.challenges)
+    .values([
+      {
+        id: 26,
+        lessonId: 7,
+        type: "SELECT",
+        order: 1,
+        title:"Karakter dan String",
+        descriptions: [
+          "Selain angka, masukan dari program dapat berupa karakter atau rangkaian karakter seperti kata. Hal ini telah lazim kalian temui, misalnya ketika mengetikkan kata kunci untuk melakukan pencarian di mesin pencari atau ketika kalian memasukkan kata sandi saat login. Oleh karena itu, program dilengkapi dengan kemampuan untuk membaca, menyimpan, mengolah, dan mencetak rangkaian karakter tersebut.",
+          "Rangkaian karakter tersebut dalam pemrograman disebut sebagai string. Definisi string dalam pemrograman adalah rangkaian karakter. Karakter sendiri merupakan suatu data berupa huruf, angka, simbol, dan karakter lain yang mengikuti suatu standar tertentu seperti “American Standard Code for Information Interchange” (ASCII) atau Unicode:",
+          "Karakter adalah unit terkecil dari teks yang dapat ditampilkan atau diproses oleh komputer. Dalam C++, karakter direpresentasikan oleh tipe data char.",
+          "Contoh: 'A', 'b', '1', '@', '#'",
+          "String adalah kumpulan karakter yang diatur dalam urutan tertentu. Dalam C++, string dapat direpresentasikan menggunakan array karakter atau menggunakan kelas std::string.",
+          'Contoh: "Hello", "12345", "C++ Programming"',
+        ],
+        imageSrcs: [
+          "",
+          "/string/string_materi_1.png",
+        ],
+        question: `Apakah string merupakan tipe data yang dapat menerima inputan angka (int)?`,
+      },
+      {
+        id: 27,
+        lessonId: 7,
+        type: "SELECT",
+        order: 2,
+        title:"Deklarasi dan Inisialisasi",
+        descriptions: [
+          "Di C++, deklarasi variabel char dan string cukup sederhana. Berikut adalah contoh bagaimana mendeklarasikan dan menginisialisasi variabel char dan string di C++.",
+          "Deklarasi dan inisialisasi char:",
+          "Deklarasi dan inisialisasi string:",
+          "Jangan lupa untuk selalu mengimport library string di awal kode ketika kamu menggunakan string di C++, seperti ini:",
+        ],
+        imageSrcs: [
+          "",
+          "/string/string_materi_12.png",
+          "/string/string_materi_13.png",
+          "/string/string_materi_14.png",
+        ],
+        question: 'Jika kita menginisialisasikan char, apakah dapat menggunakan tanda petik ganda (")?',
+      },
+      {
+        id: 28,
+        lessonId: 7,
+        type: "SELECT",
+        order: 3,
+        descriptions: [
+          "Ada beberapa cara yang lazim digunakan untuk mengimplementasikan string dalam pemrograman. Pada bahasa C, string diimplementasikan sebagai array karakter yang diakhiri oleh karakter ‘\0’. Dengan kata lain, kalian dapat membuat dan memproses suatu string seperti halnya kalian mengolah array.",
+          "Bahasa pemrograman lain seperti C++ atau Java memilih sebuah tipe data string sendiri yang menyembunyikan beberapa detail terkait pengelolaan data string yang dilakukan oleh program. Karena proses pada string berbeda dengan proses pada bilangan, untuk itu bahasa pemrograman telah dilengkapi dengan fungsi-fungsi untuk mengolah karakter dan string.",
+          "Misalnya untuk melakukan konversi dari huruf kapital ke non kapital, penggabungan string, pencarian substring, dan berbagai fungsi lainnya. Pada bahasa C, kalian dapat akses fungsi-fungsi tersebut pada pustaka.",
+          "Diberikan sebuah kode program C++ yang menerima inputan string berikut ini:",         
+        ],
+        imageSrcs: [
+          "",
+          "",
+          "",
+          "/string/string_materi_2.png",
+        ],
+        question: `Berdasarkan kode di atas, apa yang dilakukan program setelah menerima inputan string menggunakan cin?`,
+      },
+      {
+        id: 29,
+        lessonId: 7,
+        type: "SELECT",
+        order: 4,
+        descriptions: [
+          "Contoh lain, diberikan sebuah kode program C++ yang mempunyai function lowerCase() dimana program menerima inputan string berikut ini:",         
+        ],
+        imageSrcs: [
+          "/string/string_materi_3.png",
+        ],
+        question: `Berdasarkan kode di atas, apa yang dilakukan program pada line 17 sampai 19?`,
+      },
+      {
+        id: 30,
+        lessonId: 7,
+        type: "SELECT",
+        order: 5,
+        descriptions: [
+          null,         
+        ],
+        imageSrcs: [
+          "/string/string_materi_3.png",
+        ],
+        question: `Berdasarkan kode di atas, apa yang terjadi jika string yang diinputkan merupakan 'sToP'?`,
+      },
+      {
+        id: 31,
+        lessonId: 8,
+        type: "SELECT",
+        order: 1,
+        title: "Operasi Dasar",
+        descriptions: [
+          "Ada beberapa operasi dasar pada string yang melibatkan berbagai manipulasi dan pemrosesan data teks. Beberapa operasi dasar yang sering digunakan antara lain:",
+          "1. Penggabungan (Concatenation): Menggabungkan dua atau lebih string menjadi satu string menggunakan operator + atau append().",
+          "2. Pengambilan Substring: Mengambil sebagian dari string berdasarkan indeks mulai dan panjang substring.",
+          "3. Perbandingan (Comparison): Membandingkan dua string untuk menentukan urutan leksikografis atau kesamaan menggunakan operator perbandingan (==, !=, <, >).",
+          "4. Panjang string: Menentukan jumlah karakter dalam string enggunakan fungsi size() atau length().",     
+        ],
+        imageSrcs: [
+          "",
+          "/string/string_materi_4.png",
+          "/string/string_materi_5.png",
+          "/string/string_materi_6.png",
+          "/string/string_materi_7.png",
+        ],
+        question: `Apakah sebuah string dapat digabungkan dengan int secara langsung?`,
+      },
+      {
+        id: 32,
+        lessonId: 8,
+        type: "SELECT",
+        order: 2,
+        title: "Operasi Dasar",
+        descriptions: [
+          "5. Pencarian (Search): Mencari keberadaan substring dalam string dan mengembalikan indeks kemunculannya.",
+          "6. Penggantian (Replace): Mengganti bagian dari string dengan string lain.",
+          "7. Penghapusan (Erase): Menghapus bagian dari string berdasarkan indeks dan panjangnya.",
+          "8. Mengakses Elemen: Menggunakan indeks seperti array (str[index]).",
+        ],
+        imageSrcs: [
+          "/string/string_materi_8.png",
+          "/string/string_materi_9.png",
+          "/string/string_materi_10.png",
+          "/string/string_materi_11.png",
+        ],
+        question: `Jika pada penghapusan str.erase(5, 7) diganti menjadi str.erase(0, 7), maka outputnya adalah...`,
+      },
+      {
+        id: 33,
+        lessonId: 8, 
+        type: "ASSIST",
+        order: 3,
+        question: 'Perintah .length() digunakan untuk menggabungkan beberapa string.',
+      },  
+      {
+        id: 34,
+        lessonId: 8, 
+        type: "ASSIST",
+        order: 4,
+        question: 'Kita bisa mengakses elemen string dengan menggunakan nama_variabel[index].',
+      },
+      {
+        id: 35,
+        lessonId: 8, 
+        type: "SELECT",
+        order: 5,
+        imageSrcs: [
+          "/string/string_materi_15.png",
+        ],
+        question: 'Output dari kode program di atas adalah...',
+      },        
+    ]);
 
-    // /* Pilihan Ganda Unit 3*/
-    // await db
-    // .insert(schema.challengeOptions)
-    // .values([
-    //   // Jawaban No 1
-    //   {
-    //     challengeId: 26,
-    //     correct: false,
-    //     text: "Benar",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 26,
-    //     correct: true,
-    //     text: "Salah",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 2
-    //   {
-    //     challengeId: 27,
-    //     correct: false,
-    //     text: "Bisa",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 27,
-    //     correct: true,
-    //     text: "Tidak bisa",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 3
-    //   {
-    //     challengeId: 28,
-    //     correct: true,
-    //     text: "Mengubah setiap karakter menjadi non-kapital",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 28,
-    //     correct: false,
-    //     text: "Mengubah setiap karakter menjadi kapital",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 4
-    //   {
-    //     challengeId: 29,
-    //     correct: false,
-    //     text: "Jika inputan str sama dengan 'STOP', maka program akan terus menerima inputan string dan mengubahnya menjadi huruf non-kapital menggunakan fungsi lowercase().",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 29,
-    //     correct: true,
-    //     text: "Jika inputan str tidak sama dengan 'STOP', maka program akan terus menerima inputan string dan mengubahnya menjadi huruf non-kapital menggunakan fungsi lowercase().",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 5
-    //   {
-    //     challengeId: 30,
-    //     correct: true,
-    //     text: "Program akan terus berjalan hingga inputan str sama dengan 'STOP'.",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 30,
-    //     correct: false,
-    //     text: "Program akan berhenti.",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 6
-    //   {
-    //     challengeId: 31,
-    //     correct: false,
-    //     text: "Bisa",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 31,
-    //     correct: true,
-    //     text: "Tidak Bisa",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 7
-    //   {
-    //     challengeId: 32,
-    //     correct: true,
-    //     text: "World!",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 32,
-    //     correct: false,
-    //     text: "Hello",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 8
-    //   {
-    //     challengeId: 33,
-    //     correct: false,
-    //     text: "True",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 33,
-    //     correct: true,
-    //     text: "False",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 9
-    //   {
-    //     challengeId: 34,
-    //     correct: true,
-    //     text: "True",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 34,
-    //     correct: false,
-    //     text: "False",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 10
-    //   {
-    //     challengeId: 35,
-    //     correct: false,
-    //     text: "Hello, World!",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 35,
-    //     correct: true,
-    //     text: "World!Hello, ",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    // ]);
+    /* Pilihan Ganda Unit 3*/
+    await db
+    .insert(schema.challengeOptions)
+    .values([
+      // Jawaban No 1
+      {
+        challengeId: 26,
+        correct: false,
+        text: "Benar",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 26,
+        correct: true,
+        text: "Salah",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 2
+      {
+        challengeId: 27,
+        correct: false,
+        text: "Bisa",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 27,
+        correct: true,
+        text: "Tidak bisa",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 3
+      {
+        challengeId: 28,
+        correct: true,
+        text: "Mengubah setiap karakter menjadi non-kapital",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 28,
+        correct: false,
+        text: "Mengubah setiap karakter menjadi kapital",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 4
+      {
+        challengeId: 29,
+        correct: false,
+        text: "Jika inputan str sama dengan 'STOP', maka program akan terus menerima inputan string dan mengubahnya menjadi huruf non-kapital menggunakan fungsi lowercase().",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 29,
+        correct: true,
+        text: "Jika inputan str tidak sama dengan 'STOP', maka program akan terus menerima inputan string dan mengubahnya menjadi huruf non-kapital menggunakan fungsi lowercase().",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 5
+      {
+        challengeId: 30,
+        correct: true,
+        text: "Program akan terus berjalan hingga inputan str sama dengan 'STOP'.",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 30,
+        correct: false,
+        text: "Program akan berhenti.",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 6
+      {
+        challengeId: 31,
+        correct: false,
+        text: "Bisa",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 31,
+        correct: true,
+        text: "Tidak Bisa",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 7
+      {
+        challengeId: 32,
+        correct: true,
+        text: "World!",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 32,
+        correct: false,
+        text: "Hello",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 8
+      {
+        challengeId: 33,
+        correct: false,
+        text: "True",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 33,
+        correct: true,
+        text: "False",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 9
+      {
+        challengeId: 34,
+        correct: true,
+        text: "True",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 34,
+        correct: false,
+        text: "False",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 10
+      {
+        challengeId: 35,
+        correct: false,
+        text: "Hello, World!",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 35,
+        correct: true,
+        text: "World!Hello, ",
+        audioSrc: "/bling.mp3",
+      },
+    ]);
 
-    // /* Soal untuk Unit 3 - Konsep Dasar Karakter dan String */
-    // const challenges3 = await db
-    // .insert(schema.challenges)
-    // .values([
-    //   {
-    //     id: 26,
-    //     lessonId: 7,
-    //     type: "SELECT",
-    //     order: 1,
-    //     title:"Karakter dan String",
-    //     descriptions: [
-    //       "Selain angka, masukan dari program dapat berupa karakter atau rangkaian karakter seperti kata. Hal ini telah lazim kalian temui, misalnya ketika mengetikkan kata kunci untuk melakukan pencarian di mesin pencari atau ketika kalian memasukkan kata sandi saat login. Oleh karena itu, program dilengkapi dengan kemampuan untuk membaca, menyimpan, mengolah, dan mencetak rangkaian karakter tersebut.",
-    //       "Rangkaian karakter tersebut dalam pemrograman disebut sebagai string. Definisi string dalam pemrograman adalah rangkaian karakter. Karakter sendiri merupakan suatu data berupa huruf, angka, simbol, dan karakter lain yang mengikuti suatu standar tertentu seperti “American Standard Code for Information Interchange” (ASCII) atau Unicode:",
-    //       "Karakter adalah unit terkecil dari teks yang dapat ditampilkan atau diproses oleh komputer. Dalam C++, karakter direpresentasikan oleh tipe data char.",
-    //       "Contoh: 'A', 'b', '1', '@', '#'",
-    //       "String adalah kumpulan karakter yang diatur dalam urutan tertentu. Dalam C++, string dapat direpresentasikan menggunakan array karakter atau menggunakan kelas std::string.",
-    //       'Contoh: "Hello", "12345", "C++ Programming"',
-    //     ],
-    //     imageSrcs: [
-    //       "",
-    //       "/string/string_materi_1.png",
-    //     ],
-    //     question: `Apakah string merupakan tipe data yang dapat menerima inputan angka (int)?`,
-    //   },
-    //   {
-    //     id: 27,
-    //     lessonId: 7,
-    //     type: "SELECT",
-    //     order: 2,
-    //     title:"Deklarasi dan Inisialisasi",
-    //     descriptions: [
-    //       "Di C++, deklarasi variabel char dan string cukup sederhana. Berikut adalah contoh bagaimana mendeklarasikan dan menginisialisasi variabel char dan string di C++.",
-    //       "Deklarasi dan inisialisasi char:",
-    //       "Deklarasi dan inisialisasi string:",
-    //       "Jangan lupa untuk selalu mengimport library string di awal kode ketika kamu menggunakan string di C++, seperti ini:",
-    //     ],
-    //     imageSrcs: [
-    //       "",
-    //       "/string/string_materi_12.png",
-    //       "/string/string_materi_13.png",
-    //       "/string/string_materi_14.png",
-    //     ],
-    //     question: 'Jika kita menginisialisasikan char, apakah dapat menggunakan tanda petik ganda (")?',
-    //   },
-    //   {
-    //     id: 28,
-    //     lessonId: 7,
-    //     type: "SELECT",
-    //     order: 3,
-    //     descriptions: [
-    //       "Ada beberapa cara yang lazim digunakan untuk mengimplementasikan string dalam pemrograman. Pada bahasa C, string diimplementasikan sebagai array karakter yang diakhiri oleh karakter ‘\0’. Dengan kata lain, kalian dapat membuat dan memproses suatu string seperti halnya kalian mengolah array.",
-    //       "Bahasa pemrograman lain seperti C++ atau Java memilih sebuah tipe data string sendiri yang menyembunyikan beberapa detail terkait pengelolaan data string yang dilakukan oleh program. Karena proses pada string berbeda dengan proses pada bilangan, untuk itu bahasa pemrograman telah dilengkapi dengan fungsi-fungsi untuk mengolah karakter dan string.",
-    //       "Misalnya untuk melakukan konversi dari huruf kapital ke non kapital, penggabungan string, pencarian substring, dan berbagai fungsi lainnya. Pada bahasa C, kalian dapat akses fungsi-fungsi tersebut pada pustaka.",
-    //       "Diberikan sebuah kode program C++ yang menerima inputan string berikut ini:",         
-    //     ],
-    //     imageSrcs: [
-    //       "",
-    //       "",
-    //       "",
-    //       "/string/string_materi_2.png",
-    //     ],
-    //     question: `Berdasarkan kode di atas, apa yang dilakukan program setelah menerima inputan string menggunakan cin?`,
-    //   },
-    //   {
-    //     id: 29,
-    //     lessonId: 7,
-    //     type: "SELECT",
-    //     order: 4,
-    //     descriptions: [
-    //       "Contoh lain, diberikan sebuah kode program C++ yang mempunyai function lowerCase() dimana program menerima inputan string berikut ini:",         
-    //     ],
-    //     imageSrcs: [
-    //       "/string/string_materi_3.png",
-    //     ],
-    //     question: `Berdasarkan kode di atas, apa yang dilakukan program pada line 17 sampai 19?`,
-    //   },
-    //   {
-    //     id: 30,
-    //     lessonId: 7,
-    //     type: "SELECT",
-    //     order: 5,
-    //     descriptions: [
-    //       null,         
-    //     ],
-    //     imageSrcs: [
-    //       "/string/string_materi_3.png",
-    //     ],
-    //     question: `Berdasarkan kode di atas, apa yang terjadi jika string yang diinputkan merupakan 'sToP'?`,
-    //   },
-    //   {
-    //     id: 31,
-    //     lessonId: 8,
-    //     type: "SELECT",
-    //     order: 1,
-    //     title: "Operasi Dasar",
-    //     descriptions: [
-    //       "Ada beberapa operasi dasar pada string yang melibatkan berbagai manipulasi dan pemrosesan data teks. Beberapa operasi dasar yang sering digunakan antara lain:",
-    //       "1. Penggabungan (Concatenation): Menggabungkan dua atau lebih string menjadi satu string menggunakan operator + atau append().",
-    //       "2. Pengambilan Substring: Mengambil sebagian dari string berdasarkan indeks mulai dan panjang substring.",
-    //       "3. Perbandingan (Comparison): Membandingkan dua string untuk menentukan urutan leksikografis atau kesamaan menggunakan operator perbandingan (==, !=, <, >).",
-    //       "4. Panjang string: Menentukan jumlah karakter dalam string enggunakan fungsi size() atau length().",     
-    //     ],
-    //     imageSrcs: [
-    //       "",
-    //       "/string/string_materi_4.png",
-    //       "/string/string_materi_5.png",
-    //       "/string/string_materi_6.png",
-    //       "/string/string_materi_7.png",
-    //     ],
-    //     question: `Apakah sebuah string dapat digabungkan dengan int secara langsung?`,
-    //   },
-    //   {
-    //     id: 32,
-    //     lessonId: 8,
-    //     type: "SELECT",
-    //     order: 2,
-    //     title: "Operasi Dasar",
-    //     descriptions: [
-    //       "5. Pencarian (Search): Mencari keberadaan substring dalam string dan mengembalikan indeks kemunculannya.",
-    //       "6. Penggantian (Replace): Mengganti bagian dari string dengan string lain.",
-    //       "7. Penghapusan (Erase): Menghapus bagian dari string berdasarkan indeks dan panjangnya.",
-    //       "8. Mengakses Elemen: Menggunakan indeks seperti array (str[index]).",
-    //     ],
-    //     imageSrcs: [
-    //       "/string/string_materi_8.png",
-    //       "/string/string_materi_9.png",
-    //       "/string/string_materi_10.png",
-    //       "/string/string_materi_11.png",
-    //     ],
-    //     question: `Jika pada penghapusan str.erase(5, 7) diganti menjadi str.erase(0, 7), maka outputnya adalah...`,
-    //   },
-    //   {
-    //     id: 33,
-    //     lessonId: 8, 
-    //     type: "ASSIST",
-    //     order: 3,
-    //     question: 'Perintah .length() digunakan untuk menggabungkan beberapa string.',
-    //   },  
-    //   {
-    //     id: 34,
-    //     lessonId: 8, 
-    //     type: "ASSIST",
-    //     order: 4,
-    //     question: 'Kita bisa mengakses elemen string dengan menggunakan nama_variabel[index].',
-    //   },
-    //   {
-    //     id: 35,
-    //     lessonId: 8, 
-    //     type: "SELECT",
-    //     order: 5,
-    //     imageSrcs: [
-    //       "/string/string_materi_15.png",
-    //     ],
-    //     question: 'Output dari kode program di atas adalah...',
-    //   },        
-    // ]);
+    /* Soal untuk Unit 4 - Latihan Array dan String */
+    const challenges3 = await db
+    .insert(schema.challenges)
+    .values([
+      {
+        id: 36,
+        lessonId: 9,
+        type: "SELECT",
+        order: 1,
+        descriptions: [
+          "Diberikan sebuah array F dengan elemen-elemen sebagai berikut: F = [3, 7, 6, 6, 9, 5]. Kamu diharuskan untuk menentukan jumlah elemen yang lebih kecil dari 7. Berikut adalah langkah-langkahnya:",
+          "1. Inisialisasi variabel dengan nilai 0 untuk menampung jumlah elemen yang lebih kecil dari 7",
+          "2. Iterasi setiap elemen array menggunakan loop",
+          "3. Periksa kondisi apakah elemen lebih kecil dari 7 atau tidak",
+          "4. .....",
+        ],
+        question: `Langkah selanjutnya (ke-4) setelah itu adalah...`,
+      },
+      {
+        id: 37,
+        lessonId: 9, 
+        type: "SELECT",
+        order: 2,
+        descriptions: [
+          "Diberikan sebuah array satu dimensi C dengan bilangan bulat sebagai berikut: {10, 5, 9, 9, 7, 6}",
+        ],
+        question: 'Jika C[2]=5 dan C[1]=4, maka array C yang terbaru adalah...',
+      },
+      {
+        id: 38,
+        lessonId: 9, 
+        type: "SELECT",
+        order: 3,
+        descriptions: [
+          "Diberikan sebuah array satu dimensi Z dengan bilangan bulat sebagai berikut: {7, 6, 5, 4, 3, 2}",
+        ],
+        question: 'Manakah dari berikut ini yang merupakan pernyataan benar tentang array Z?',
+      },
+      {
+        id: 39,
+        lessonId: 9, 
+        type: "SELECT",
+        order: 4,
+        descriptions: [
+          "Diberikan array H = [7, 3, 5, 5, 1, 4, 8, 6, 5]. Kamu diminta untuk menemukan median dari array tersebut.",
+        ],
+        question: 'Langkah pertama yang paling tepat untuk dilakukan adalah...',
+      },
+      {
+        id: 40,
+        lessonId: 9, 
+        type: "SELECT",
+        order: 5,
+        descriptions: [
+          "Diberikan sebuah array A yang terdiri dari n bilangan bulat dengan pola. Berikut adalah isi array A: {3, 6, 9, 12, 15, 18, 21, 24}",
+        ],
+        question: 'Berdasarkan pola tersebut, elemen ke-10 dari array A adalah...',
+      },
+      {
+        id: 41,
+        lessonId: 10, 
+        type: "SELECT",
+        order: 1,
+        descriptions: [
+          "Diberikan array A yang berisi elemen-elemen sebagai berikut:",
+          "Kamu diminta untuk mencari jumlah semua elemen dalam array A dan mencetak hasilnya ke layar."
+        ],
+        imageSrcs: [
+          "/array/array_latihan_1.png",
+        ],
+        question: 'Manakah kode C++ berikut yang benar untuk menyelesaikan tugas tersebut?',
+      },
+      {
+        id: 42,
+        lessonId: 10, 
+        type: "SELECT",
+        order: 2,
+        descriptions: [
+          "Diberikan array A yang berisi elemen-elemen sebagai berikut:",
+          "Kamu diminta untuk mencetak panjang array A."
+        ],
+        imageSrcs: [
+          "/array/array_latihan_2.png",
+        ],
+        question: 'Manakah perintah di bawah ini yang benar?',
+      },
+      {
+        id: 43,
+        lessonId: 10, 
+        type: "SELECT",
+        order: 3,
+        descriptions: [
+          'Bernadya sedang mempelajari algoritma dan ingin menghitung jumlah karakter non-huruf dalam sebuah kalimat. Ia memiliki kalimat berikut: "Pemrograman 2024".',
+        ],
+        question: 'Mana di antara pilihan berikut yang merupakan langkah yang benar untuk dilakukan oleh Bernadya dalam menghitung jumlah karakter non-huruf?',
+      },
+      {
+        id: 44,
+        lessonId: 10, 
+        type: "SELECT",
+        order: 4,
+        descriptions: [
+          'Diberikan string s yang berisi kalimat "Pemrograman Komputer Menyenangkan". Kamu ingin menentukan jumlah huruf vokal (a, e, i, o, u) dalam string tersebut.',
+        ],
+        question: 'Bagaimana cara kita menyelesaikan masalah ini agar lebih mudah dipecahkan?',
+      },
+      {
+        id: 45,
+        lessonId: 10, 
+        type: "SELECT",
+        order: 5,
+        descriptions: [
+          'Diana adalah seorang siswa yang sedang belajar tentang penggunaan array dalam pemrograman. Dia diminta untuk membuat program sederhana yang dapat mencatat nilai matematika siswa dalam satu kelas. Setiap nilai akan disimpan dalam sebuah array, dan kemudian Diana harus menemukan nilai rata-rata dari semua nilai tersebut.',
+          'Berikut adalah data nilai siswa yang dikumpulkan oleh Diana: 80, 75, 90, 85, 70',
+          'Diana menuliskan sebuah program untuk menghitung rata-rata nilai dengan langkah-langkah sebagai berikut:',
+          '1.	Menyimpan nilai-nilai tersebut dalam sebuah array bernama nilai.',
+          '2.	Menghitung total dari semua nilai dalam array.',
+          '3.	Membagi total nilai dengan jumlah siswa untuk mendapatkan rata-rata.',
+        ],
+        question: 'Langkah mana yang tidak perlu dilakukan Diana jika tujuannya hanya untuk menyimpan dan melihat nilai tertinggi di kelas?',
+      },
+      {
+        id: 46,
+        lessonId: 11, 
+        type: "ASSIST",
+        order: 1,
+        question: `Kita dapat memasukkan karakter '5' ke dalam sebuah string.`,
+      },
+      {
+        id: 47,
+        lessonId: 11, 
+        type: "SELECT",
+        order: 2,
+        question: `Jika kita mencari substring “lo” dalam string “hello_world”, pada indeks berapa substring tersebut pertama kali ditemukan?`,
+      },
+      {
+        id: 48,
+        lessonId: 11, 
+        type: "SELECT",
+        order: 3,
+        question: `Apa hasil dari mengganti semua kemunculan karakter 'l' dengan karakter 'x' dalam string “hello_world”?`,
+      },
+      {
+        id: 49,
+        lessonId: 11, 
+        type: "SELECT",
+        order: 4,
+        question: `Jika kamu ingin menghapus 3 karakter dari string s = "programming", dimulai dari indeks ke-4, apa yang harus dilakukan?`,
+      },
+      {
+        id: 50,
+        lessonId: 11, 
+        type: "SELECT",
+        imageSrcs: [
+          "/string/string_latihan_1.png",
+        ],
+        order: 5,
+        question: `Apa output dari kode program di atas?`,
+      },
+      {
+        id: 51,
+        lessonId: 12, 
+        type: "SELECT",
+        imageSrcs: [
+          "/array/array_latihan_3.png",
+        ],
+        order: 1,
+        question: `Apa output dari kode program di atas?`,
+      },
+      {
+        id: 52,
+        lessonId: 12, 
+        type: "SELECT",
+        imageSrcs: [
+          "/array/array_latihan_4.png",
+        ],
+        order: 2,
+        question: `Apa output dari kode program di atas?`,
+      },
+      {
+        id: 53,
+        lessonId: 12, 
+        type: "SELECT",
+        descriptions: [
+          "Diberikan sebuah vector yang berisi angka-angka berikut: {4, 7, 2, 9, 5}. Jika Anda melakukan operasi berikut:",
+          "1. Menggandakan setiap elemen dalam vector.",
+          "2. Mengurutkan elemen-elemen yang telah digandakan dalam urutan naik.",
+        ],
+        order: 3,
+        question: `Apa vector akhir setelah kedua operasi di atas?`,
+      },
+      {
+        id: 54,
+        lessonId: 12, 
+        type: "SELECT",
+        imageSrcs: [
+          "/array/array_latihan_5.png",
+        ],
+        order: 4,
+        question: `Apa output dari kode program di atas?`,
+      },
+      {
+        id: 55,
+        lessonId: 12, 
+        type: "SELECT",
+        imageSrcs: [
+          "/array/array_latihan_6.png",
+        ],
+        order: 5,
+        question: `Apa output dari kode program di atas?`,
+      },
+    ]);
 
-    // /* Pilihan Ganda Unit 3*/
-    // await db
-    // .insert(schema.challengeOptions)
-    // .values([
-    //   // Jawaban No 1
-    //   {
-    //     challengeId: 26,
-    //     correct: false,
-    //     text: "Benar",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 26,
-    //     correct: true,
-    //     text: "Salah",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 2
-    //   {
-    //     challengeId: 27,
-    //     correct: false,
-    //     text: "Bisa",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 27,
-    //     correct: true,
-    //     text: "Tidak bisa",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 3
-    //   {
-    //     challengeId: 28,
-    //     correct: true,
-    //     text: "Mengubah setiap karakter menjadi non-kapital",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 28,
-    //     correct: false,
-    //     text: "Mengubah setiap karakter menjadi kapital",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 4
-    //   {
-    //     challengeId: 29,
-    //     correct: false,
-    //     text: "Jika inputan str sama dengan 'STOP', maka program akan terus menerima inputan string dan mengubahnya menjadi huruf non-kapital menggunakan fungsi lowercase().",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 29,
-    //     correct: true,
-    //     text: "Jika inputan str tidak sama dengan 'STOP', maka program akan terus menerima inputan string dan mengubahnya menjadi huruf non-kapital menggunakan fungsi lowercase().",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 5
-    //   {
-    //     challengeId: 30,
-    //     correct: true,
-    //     text: "Program akan terus berjalan hingga inputan str sama dengan 'STOP'.",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 30,
-    //     correct: false,
-    //     text: "Program akan berhenti.",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 6
-    //   {
-    //     challengeId: 31,
-    //     correct: false,
-    //     text: "Bisa",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 31,
-    //     correct: true,
-    //     text: "Tidak Bisa",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 7
-    //   {
-    //     challengeId: 32,
-    //     correct: true,
-    //     text: "World!",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 32,
-    //     correct: false,
-    //     text: "Hello",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 8
-    //   {
-    //     challengeId: 33,
-    //     correct: false,
-    //     text: "True",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 33,
-    //     correct: true,
-    //     text: "False",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 9
-    //   {
-    //     challengeId: 34,
-    //     correct: true,
-    //     text: "True",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 34,
-    //     correct: false,
-    //     text: "False",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   // Jawaban No 10
-    //   {
-    //     challengeId: 35,
-    //     correct: false,
-    //     text: "Hello, World!",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    //   {
-    //     challengeId: 35,
-    //     correct: true,
-    //     text: "World!Hello, ",
-    //     audioSrc: "/bling.mp3",
-    //   },
-    // ]);
+    /* Pilihan Ganda Unit 4*/
+    await db
+    .insert(schema.challengeOptions)
+    .values([
+      // Jawaban No 1
+      {
+        challengeId: 36,
+        correct: false,
+        text: "Cetak hasil akhir",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 36,
+        correct: true,
+        text: "Update variabel jika memenuhi kondisi",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 36,
+        correct: false,
+        text: "Update variabel jika tidak memenuhi kondisi",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 2
+      {
+        challengeId: 37,
+        correct: false,
+        text: "C[] = {4, 5, 9, 9, 7, 6}",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 37,
+        correct: true,
+        text: "C[] = {10, 4, 5 9, 7, 6}",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 3
+      {
+        challengeId: 38,
+        correct: true,
+        text: "Panjang array adalah 6",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 38,
+        correct: false,
+        text: "Array Z terurut dalam urutan menaik",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId:38,
+        correct: false,
+        text: "Elemen indeks ke-3 adalah 5",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 4
+      {
+        challengeId: 39,
+        correct: false,
+        text: "Mengidentifikasi elemen tengah dalam array",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 39,
+        correct: true,
+        text: "Mengurutkan array dalam urutan menaik",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 39,
+        correct: false,
+        text: "Menghitung jumlah total elemen dalam array",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 5
+      {
+        challengeId: 40,
+        correct: false,
+        text: "27",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 40,
+        correct: true,
+        text: "30",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 40,
+        correct: false,
+        text: "33",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 40,
+        correct: false,
+        text: "36",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 6
+      {
+        challengeId: 41,
+        correct: true,
+        text: "1",
+        imageSrc: "/array/array_latihan_answer_1.png",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 41,
+        correct: false,
+        text: "2",
+        imageSrc: "/array/array_latihan_answer_2.png",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 7
+      {
+        challengeId: 42,
+        correct: true,
+        text: "cout << A.size();",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 42,
+        correct: false,
+        text: "cout << A.length();",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 8
+      {
+        challengeId: 43,
+        correct: true,
+        text: "Menghitung jumlah karakter non-huruf dengan memindai setiap karakter dalam string dan menambahkannya ke dalam variabel penghitung jika karakter tersebut bukan huruf",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 43,
+        correct: false,
+        text: "Menghitung jumlah karakter non-huruf dengan menghapus semua karakter non-huruf dari string dan menghitung panjang string yang tersisa",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 9
+      {
+        challengeId: 44,
+        correct: false,
+        text: "Menghitung jumlah huruf vokal secara manual dengan menghitung satu per satu di setiap kata",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 44,
+        correct: true,
+        text: "Membagi string s menjadi kata-kata terpisah, lalu menghitung jumlah huruf vokal di setiap kata, dan menjumlahkan hasilnya.",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 10
+      {
+        challengeId: 45,
+        correct: false,
+        text: "Langkah 1",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 45,
+        correct: true,
+        text: "Langkah 3",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 11
+      {
+        challengeId: 46,
+        correct: true,
+        text: "True",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 46,
+        correct: false,
+        text: "False",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 12
+      {
+        challengeId: 47,
+        correct: true,
+        text: "2",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 47,
+        correct: false,
+        text: "3",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 13
+      {
+        challengeId: 48,
+        correct: false,
+        text: '"hexxo_word"',
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 48,
+        correct: true,
+        text: '"hexxo_worxd"',
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 14
+      {
+        challengeId: 49,
+        correct: false,
+        text: 's.remove(4, 3);',
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 49,
+        correct: true,
+        text: 's.erase(4, 3);',
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 49,
+        correct: false,
+        text: 's.delete(4, 3);',
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 15
+      {
+        challengeId: 50,
+        correct: false,
+        text: "'o'",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 50,
+        correct: false,
+        text: "'l'",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 50,
+        correct: true,
+        text: "'h'",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 50,
+        correct: false,
+        text: "'e'",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 16
+      {
+        challengeId: 51,
+        correct: false,
+        text: "1 2 3 4 5",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 51,
+        correct: true,
+        text: "2 4 6 8 10",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 17
+      {
+        challengeId: 52,
+        correct: true,
+        text: "25 64 144 49 9",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 52,
+        correct: false,
+        text: "5 8 12 7 3",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 52,
+        correct: false,
+        text: "25 49 64 81 100",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 18
+      {
+        challengeId: 53,
+        correct: false,
+        text: "8, 14, 4, 18, 10",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 53,
+        correct: true,
+        text: "4, 8, 10, 14, 18",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 53,
+        correct: false,
+        text: "18, 14, 10, 8, 4",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 19
+      {
+        challengeId: 54,
+        correct: false,
+        text: "1",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 54,
+        correct: false,
+        text: "2",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 54,
+        correct: false,
+        text: "3",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 54,
+        correct: true,
+        text: "6",
+        audioSrc: "/bling.mp3",
+      },
+      // Jawaban No 20
+      {
+        challengeId: 55,
+        correct: true,
+        text: "25",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 55,
+        correct: false,
+        text: "20",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 55,
+        correct: false,
+        text: "15",
+        audioSrc: "/bling.mp3",
+      },
+      {
+        challengeId: 55,
+        correct: false,
+        text: "12",
+        audioSrc: "/bling.mp3",
+      },
+    ]);
 
     console.log("Seeding finished");
   } catch (error) {

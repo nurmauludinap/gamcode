@@ -53,7 +53,7 @@ export const upsertChallengeProgress = async (challengeId: number) => {
 
     await db.update(userProgress).set({
       hearts: Math.min(currentUserProgress.hearts + 1, 5),
-      points: currentUserProgress.points + 10,
+      points: currentUserProgress.points,
     }).where(
       eq(userProgress.userId, userId),
     );

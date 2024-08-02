@@ -16,12 +16,12 @@ export const firstQuests = [
     value: 100,
   },
   {
-    title: "Dapatkan 500 XP",
-    value: 500,
+    title: "Dapatkan 300 XP",
+    value: 300,
   },
   {
-    title: "Dapatkan 1000 XP",
-    value: 1000,
+    title: "Dapatkan 500 XP",
+    value: 500,
   },
 ]
 

@@ -20,7 +20,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col items-center gap-y-8">
         <h1 className="text-xl lg:text-2xl font-bold text-neutral-600 max-w-[480px] text-center">
-          Belajar Algoritma dan Pemrograman secara Computational Thinking bersama GamCode dengan suasana yang menarik.
+          Mari belajar Algoritma dan Pemrograman bersama GamCode!
         </h1>
         <div className="flex flex-col items-center gap-y-3 max-w-[330px] w-full">
           <ClerkLoading>

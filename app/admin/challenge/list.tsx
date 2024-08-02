@@ -1,11 +1,25 @@
-import { Datagrid, List, NumberField, ReferenceField, TextField, SelectField } from "react-admin";
+import { Datagrid, List, NumberField, ReferenceField, TextField, SelectField, ArrayField, SingleFieldList, ChipField } from "react-admin";
 
 export const ChallengeList = () => {
   return(
     <List>
     <Datagrid rowClick="edit">
       <TextField source="id"/>
+      
+      <ArrayField source="descriptions">
+          <SingleFieldList>
+            <ChipField source="" />
+          </SingleFieldList>
+
+        </ArrayField>
+        <ArrayField source="imageSrcs">
+          <SingleFieldList>
+            <ChipField source="" />
+          </SingleFieldList>
+        </ArrayField>
+
       <TextField source="question"/>
+      
       <SelectField
         source="type"
         choices={[
@@ -19,18 +33,10 @@ export const ChallengeList = () => {
           },
         ]}
       />
+      
       <ReferenceField source="lessonId" reference="lessons"/>
+      
       <NumberField source="order"/>
-      <TextField source="description1"/>
-      <TextField source="description2"/>
-      <TextField source="description3"/>
-      <TextField source="description4"/>
-      <TextField source="description5"/>
-      <TextField source="imageSrc1"/>
-      <TextField source="imageSrc2"/>
-      <TextField source="imageSrc3"/>
-      <TextField source="imageSrc4"/>
-      <TextField source="imageSrc5"/>
     </Datagrid>
   </List>
   );

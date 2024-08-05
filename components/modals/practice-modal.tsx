@@ -40,7 +40,7 @@ export const PracticeModal = () => {
                         Sesi Latihan
                     </DialogTitle>
                     <DialogDescription className="text-center text-base">
-                        Kamu bisa mendapatkan hati dan poin dengan mengulang kembali materi sebelumnya. Kamu tidak akan kehilangan hati atau poin di sesi latihan.
+                        Kamu bisa mendapatkan hati dengan mengulang kembali materi sebelumnya. Kamu tidak akan kehilangan hati atau poin di sesi latihan.
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="mb-4">

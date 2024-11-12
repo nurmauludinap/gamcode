@@ -13,7 +13,7 @@ type Props = {
   selected?: boolean;
   onClick: () => void;
   disabled?: boolean;
-  status?: "correct" | "wrong" | "none";
+  status?: "correct" | "wrong" | "none" | "material";
   type: typeof challenges.$inferSelect["type"];
 }
 
@@ -63,9 +63,19 @@ export const Card = ({
         </div>
       )}
       <div className={cn(
-        "flex items-center justify-between",
+        "flex items-center gap-x-2",
         type === "ASSIST" && "flex-row-reverse",
       )}>
+        <div className={cn(
+          "lg:w-[30px] lg:h-[30px] w-[20px] h-[20px] border-2 flex items-center justify-center rounded-lg text-neutral-400 lg:text-[15px] text-xs font-semibold",
+          selected && "border-blue text-greenBlue",
+          selected && status === "correct" 
+            && "border-green-500 text-green-500",
+          selected && status === "wrong" 
+            && "border-rose-500 text-rose-500",
+        )}>
+          {shortcut}
+        </div>
         {type === "ASSIST" && <div/>}
         <p className={cn(
           "text-neutral-600 text-sm lg:text-base",
@@ -77,16 +87,6 @@ export const Card = ({
         )}>
           {text}
         </p>
-        <div className={cn(
-          "lg:w-[30px] lg:h-[30px] w-[20px] h-[20px] border-2 flex items-center justify-center rounded-lg text-neutral-400 lg:text-[15px] text-xs font-semibold",
-          selected && "border-blue text-greenBlue",
-          selected && status === "correct" 
-            && "border-green-500 text-green-500",
-          selected && status === "wrong" 
-            && "border-rose-500 text-rose-500",
-        )}>
-          {shortcut}
-        </div>
       </div>
     </div>
   );

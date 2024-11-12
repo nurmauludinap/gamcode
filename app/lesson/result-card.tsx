@@ -24,7 +24,7 @@ export const ResultCard = ({
         variant === "hearts" && "bg-rose-500",
         variant === "points" && "bg-orange-400",
       )}>
-        {variant === "hearts" ? "Hearts Left" : "Total XP"}
+        {variant === "hearts" ? "Sisa Hati" : "Total XP"}
       </div>
       <div className={cn(
         "rounded-2xl bg-white items-center flex justify-center p-6 font-bold text-lg",

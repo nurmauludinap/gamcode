@@ -16,6 +16,7 @@ import { ResultCard } from "./result-card";
 import { useRouter } from "next/navigation";
 import { useHeartsModal } from "@/store/use-hearts-modal";
 import { usePracticeModal } from "@/store/use-practice-modal";
+import React from "react"; 
 
 type Props = {
     initialPercentage: number;
@@ -71,23 +72,46 @@ export const Quiz = ({
         const uncompletedIndex = challenges.findIndex((challenge) => !challenge.completed);
         return uncompletedIndex === -1 ? 0 : uncompletedIndex;
     });
-    const [selectedOption, setSelectedOption] = useState<number>();
+    const [selectedOption, setSelectedOption] = useState<number | number[]>();
     const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
 
     const currentChallenge = challenges[activeIndex];
     const options = currentChallenge?.challengeOptions ?? [];
 
     const onNext = () => {
-        setActiveIndex((current) => current + 1);
+        // setActiveIndex((current) => current + 1);
+        // Update progress if no options are present
+        if (!options.length) {
+            startTransition(() => {
+                upsertChallengeProgress(currentChallenge.id)
+                    .then((response) => {
+                        if (response?.error === "hearts") {
+                            openHeartsModal();
+                            return;
+                        }
+                        setPercentage((prev) => prev + 100 / challenges.length);
+                        onNextChallenge();
+                    })
+                    .catch(() => toast.error("Something went wrong. Please try again."));
+            });
+        } else {
+            onNextChallenge();
+        }
     };
 
-    const onSelect = (id: number) => {
-        if (status !== "none") return;
+    const onNextChallenge = () => {
+        setActiveIndex((current) => current + 1);
+        setStatus("none");
+        setSelectedOption(undefined);
+    };
 
+    const onSelect = (id: number | number[]) => {
+        if (status !== "none") return;
         setSelectedOption(id);
     };
+
     const onContinue = () => {
-        if (!selectedOption) return;
+        // if (!selectedOption || (Array.isArray(selectedOption) && selectedOption.length === 0)) return;
 
         if (!challengeOptions) {
             onNext();
@@ -107,52 +131,156 @@ export const Quiz = ({
             return;
         }
 
-        const correctOption = options.find((option) => option.correct);
+        // const correctOptionIds = options.filter((option) => option.correct).map((option) => option.id);
 
-        if (!correctOption) {
+        // if (Array.isArray(selectedOption)) {
+        // const isCorrect = selectedOption.every((id) => correctOptionIds.includes(id)) &&
+        //     selectedOption.length === correctOptionIds.length;
+        
+        // if (isCorrect) {
+        //     startTransition(() => {
+        //     upsertChallengeProgress(currentChallenge.id)
+        //         .then((response) => {
+        //         if (response?.error === "hearts") {
+        //             openHeartsModal();
+        //             return;
+        //         }
+        //         correctControls.play();
+        //         setStatus("correct");
+        //         setPercentage((prev) => prev + 100 / challenges.length);
+
+        //         if (initialPercentage === 100) {
+        //             setHearts((prev) => Math.min(prev + 1, 5));
+        //         }
+        //         })
+        //         .catch(() => toast.error("Something went wrong. Please try again."))
+        //     });
+        // } else {
+        //     startTransition(() => {
+        //     reduceHearts(currentChallenge.id)
+        //         .then((response) => {
+        //         if (response?.error === "hearts") {
+        //             openHeartsModal();
+        //             return;
+        //         }
+                
+        //         incorrectControls.play();
+        //         setStatus("wrong");
+
+        //         if (!response?.error) {
+        //             setHearts((prev) => Math.max(prev - 1, 0));
+        //         }
+        //         })
+        //         .catch(() => toast.error("Something went wrong. Please try again."))
+        //     });
+        // }
+        // } else {
+        //     if (correctOptionIds.length === 1 && correctOptionIds[0] === selectedOption) {
+        //         // Handle correct answer scenario
+        //         startTransition(() => {
+        //         upsertChallengeProgress(currentChallenge.id)
+        //             .then((response) => {
+        //             if (response?.error === "hearts") {
+        //                 openHeartsModal();
+        //                 return;
+        //             }
+        //             correctControls.play();
+        //             setStatus("correct");
+        //             setPercentage((prev) => prev + 100 / challenges.length);
+
+        //             if (initialPercentage === 100) {
+        //                 setHearts((prev) => Math.min(prev + 1, 5));
+        //             }
+        //             })
+        //             .catch(() => toast.error("Something went wrong. Please try again."))
+        //         });
+        //     } else {
+        //         // Handle wrong answer scenario
+        //         startTransition(() => {
+        //         reduceHearts(currentChallenge.id)
+        //             .then((response) => {
+        //             if (response?.error === "hearts") {
+        //                 openHeartsModal();
+        //                 return;
+        //             }
+                    
+        //             incorrectControls.play();
+        //             setStatus("wrong");
+
+        //             if (!response?.error) {
+        //                 setHearts((prev) => Math.max(prev - 1, 0));
+        //             }
+        //             })
+        //             .catch(() => toast.error("Something went wrong. Please try again."))
+        //         });
+        //     }
+        // }
+
+        if (!selectedOption || (Array.isArray(selectedOption) && selectedOption.length === 0)) {
+            onNext();
             return;
         }
 
-        if (correctOption.id === selectedOption) {
-            startTransition(() => {
-                upsertChallengeProgress(currentChallenge.id)
-                    .then((response) => {
-                        if (response?.error === "hearts") {
-                            openHeartsModal();
-                            return;
-                        }
+        const correctOptionIds = options.filter((option) => option.correct).map((option) => option.id);
 
-                        correctControls.play();
-                        setStatus("correct");
-                        setPercentage((prev) => prev + 100 / challenges.length);
-                        
-                        // Bagian practice (mengulang lagi)
-                        if (initialPercentage === 100) {
-                            setHearts((prev) => Math.min(prev + 1, 5));
-                        }
-                    })
-                    .catch(() => toast.error("Something went wrong. Please try again."))
-            });
-        }else{
-            startTransition(() => {
-                reduceHearts(currentChallenge.id)
-                    .then((response) => {
-                        if (response?.error === "hearts") {
-                            openHeartsModal();
-                            return;
-                        }
-                        
-                        incorrectControls.play();
-                        setStatus("wrong");
+        if (Array.isArray(selectedOption)) {
+            const isCorrect = selectedOption.every((id) => correctOptionIds.includes(id)) &&
+                selectedOption.length === correctOptionIds.length;
 
-                        if (!response?.error) {
-                            setHearts((prev) => Math.max(prev - 1, 0));
-                        }
-                    })
-                    .catch(() => toast.error("Something went wrong. Please try again."))
-            })
+            if (isCorrect) {
+                handleCorrectAnswer();
+            } else {
+                handleWrongAnswer();
+            }
+        } else {
+            if (correctOptionIds.length === 1 && correctOptionIds[0] === selectedOption) {
+                handleCorrectAnswer();
+            } else {
+                handleWrongAnswer();
+            }
         }
     };
+
+    const handleCorrectAnswer = () => {
+        startTransition(() => {
+            upsertChallengeProgress(currentChallenge.id)
+                .then((response) => {
+                    if (response?.error === "hearts") {
+                        openHeartsModal();
+                        return;
+                    }
+                    correctControls.play();
+                    setStatus("correct");
+                    setPercentage((prev) => prev + 100 / challenges.length);
+
+                    if (initialPercentage === 100) {
+                        setHearts((prev) => Math.min(prev + 1, 5));
+                    }
+                })
+                .catch(() => toast.error("Something went wrong. Please try again."));
+        });
+    };
+
+    const handleWrongAnswer = () => {
+        startTransition(() => {
+            reduceHearts(currentChallenge.id)
+                .then((response) => {
+                    if (response?.error === "hearts") {
+                        openHeartsModal();
+                        return;
+                    }
+
+                    incorrectControls.play();
+                    setStatus("wrong");
+
+                    if (!response?.error) {
+                        setHearts((prev) => Math.max(prev - 1, 0));
+                    }
+                })
+                .catch(() => toast.error("Something went wrong. Please try again."));
+        });
+    };
+
 
     if (!currentChallenge) {
         return (
@@ -186,7 +314,7 @@ export const Quiz = ({
                     <div className="flex items-center gap-x-4 w-full">
                         <ResultCard
                             variant="points"
-                            value={challenges.length * 10}
+                            value={initialPercentage === 100 ? 0 : challenges.length * 10}
                         />
                         <ResultCard
                             variant="hearts"
@@ -209,6 +337,8 @@ export const Quiz = ({
 
     const descriptions = (currentChallenge.descriptions as string[]) ?? [];
     const imageSrcs = (currentChallenge.imageSrcs as string[]) ?? [];
+    const links = (currentChallenge.links as string[]) ?? [];
+    const codeSources = (currentChallenge.codeSources as string[]) ?? [];
 
     // Create a combined array with alternating items
     const combinedItems = [];
@@ -220,6 +350,12 @@ export const Quiz = ({
         }
         if (imageSrcs[i]) { // Check if the specific imageSrcs[i] is not null or undefined
             combinedItems.push({ type: 'image', content: imageSrcs[i] });
+        }
+        if (links[i]) { // Check if the specific imageSrcs[i] is not null or undefined
+            combinedItems.push({ type: 'link', content: links[i] });
+        }
+        if (codeSources[i]) { // Check if the specific imageSrcs[i] is not null or undefined
+            combinedItems.push({ type: 'code_source', content: codeSources[i] });
         }
     }
 
@@ -256,16 +392,40 @@ export const Quiz = ({
                                         className="items-center"
                                     />
                                 );
+                            } else if (item.type === 'link') {    
+                                return(
+                                    <div 
+                                    key={index} 
+                                    style={{ position: 'relative', width: '100%', height: 0, paddingTop: '56.25%', paddingBottom: 0, boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)', marginTop: '1em', marginBottom: '0.9em', overflow: 'hidden', borderRadius: '8px', willChange: 'transform' }}
+                                >
+                                    <iframe 
+                                        loading="lazy" 
+                                        style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, border: 'none', padding: 0, margin: 0 }}
+                                        src={item.content} 
+                                        allowFullScreen 
+                                        allow="fullscreen"
+                                    ></iframe>
+                                </div>
+                                )   
+                            } else if (item.type === 'code_source') {    
+                                return(
+                                    <iframe
+                                        key={index}
+                                        height="300px"  
+                                        src={item.content} 
+                                        width="100%"
+                                    ></iframe>
+                                )   
                             }
                             return null;
                         })}
-                        <h1 className="mt-8 text-justify font-bold">
+                        <h1 className="mt-8 text-justify font-medium">
                             {title}    
                         </h1>
                         <div>
-                            {currentChallenge.type === "ASSIST" && (
+                            {/* {currentChallenge.type === "ASSIST" && (
                                 <QuestionBubble question={currentChallenge.question}/>
-                            )}
+                            )} */}
                             <Challenge
                                 options={options}
                                 onSelect={onSelect}
@@ -279,8 +439,8 @@ export const Quiz = ({
                 </div>
             </div>
             <Footer
-                disabled={pending || !selectedOption}
-                status={status}
+                disabled={pending || (!selectedOption && options.length > 0)}
+                status={!options.length ? "material" : status}
                 onCheck={onContinue}
             />  
         </>

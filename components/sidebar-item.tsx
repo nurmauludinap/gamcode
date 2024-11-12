@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type Props = {
+type Props = {  
     label: string;
     iconSrc: string;
     href: string;
@@ -17,7 +17,8 @@ export const SidebarItem = ({
     href,
 }: Props) => {
     const pathname = usePathname();
-    const active = pathname === href;
+    const active = pathname === href || (href.startsWith('/lkpd') && pathname?.startsWith('/lkpd/')) || (href.startsWith('/refleki') && pathname?.startsWith('/refleksi/'));
+
 
     return (
         <Button

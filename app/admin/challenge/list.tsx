@@ -1,22 +1,18 @@
-import { Datagrid, List, NumberField, ReferenceField, TextField, SelectField, ArrayField, SingleFieldList, ChipField } from "react-admin";
+import { 
+  Datagrid, 
+  List, 
+  NumberField, 
+  ReferenceField, 
+  TextField, 
+  SelectField,
+
+} from "react-admin";
 
 export const ChallengeList = () => {
   return(
     <List>
     <Datagrid rowClick="edit">
       <TextField source="id"/>
-      
-      <ArrayField source="descriptions">
-          <SingleFieldList>
-            <ChipField source="" />
-          </SingleFieldList>
-
-        </ArrayField>
-        <ArrayField source="imageSrcs">
-          <SingleFieldList>
-            <ChipField source="" />
-          </SingleFieldList>
-        </ArrayField>
 
       <TextField source="question"/>
       

@@ -16,7 +16,13 @@ export default authMiddleware({
       if (req.nextUrl.pathname === "/quests" && !auth.userId) {
         return NextResponse.redirect(new URL("/", req.url));
       } 
-      if (req.nextUrl.pathname === "/shop" && !auth.userId) {
+      if (req.nextUrl.pathname === "/lkpd" && !auth.userId) {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
+      if (req.nextUrl.pathname === "/refleksi" && !auth.userId) {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
+      if (req.nextUrl.pathname === "/compiler" && !auth.userId) {
         return NextResponse.redirect(new URL("/", req.url));
       }
   }

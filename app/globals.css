@@ -70,6 +70,25 @@ body,
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
+
+  .iframe-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 177.78%; /* Aspect ratio (9:16) */
+    height: 0;
+    overflow: hidden;
+    border-radius: 4px; /* Rounded corners for the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .responsive-iframe {
+    width: calc(100% - 256px); /* 256px is the width of the sidebar */
+    height: 96vh;
+    margin-left: 130px;
+    display: block;
+    border: none;
+    z-index: 1;
+  }
 }
 
 @layer base {

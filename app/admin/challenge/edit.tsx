@@ -1,21 +1,19 @@
-import { Edit, NumberInput, ReferenceInput, SimpleForm, TextInput, required, SelectInput, ArrayInput, SimpleFormIterator } from "react-admin";
+import { 
+  Edit, 
+  NumberInput, 
+  ReferenceInput, 
+  SimpleForm, 
+  TextInput, 
+  required, 
+  SelectInput, 
+  ArrayInput, 
+  SimpleFormIterator 
+} from "react-admin";
 
 export const ChallengeEdit = () => {
   return(
     <Edit>
     <SimpleForm>
-      <ArrayInput source="descriptions">
-          <SimpleFormIterator>
-            <TextInput label="Description" source="" />
-          </SimpleFormIterator>
-        
-        </ArrayInput>
-        <ArrayInput source="imageSrcs">
-          <SimpleFormIterator>
-            <TextInput label="Image Source" source="" />
-          </SimpleFormIterator>
-        </ArrayInput>
-      
       <TextInput 
         source="question"
         validate={[required()]} 
@@ -46,7 +44,31 @@ export const ChallengeEdit = () => {
         source="order"
         validate={[required()]}
         label="Order"
-      />     
+      />
+      
+      <ArrayInput source="descriptions" label="Descriptions">
+        <SimpleFormIterator>
+          <TextInput source={""} />
+        </SimpleFormIterator>
+      </ArrayInput>
+
+      <ArrayInput source="imageSrcs" label="Image Sources">
+        <SimpleFormIterator>
+          <TextInput source={""} />
+        </SimpleFormIterator>
+      </ArrayInput>
+
+      <ArrayInput source="links" label="Links">
+        <SimpleFormIterator>
+          <TextInput source={""} />
+        </SimpleFormIterator>
+      </ArrayInput>
+
+      <ArrayInput source="codeSources" label="Code Sources">
+        <SimpleFormIterator>
+          <TextInput source={""} />
+        </SimpleFormIterator>
+      </ArrayInput>     
     </SimpleForm>
   </Edit>
   );

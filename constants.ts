@@ -42,9 +42,5 @@ export const secondQuests = [
     title: "Naik Level 8",
     value: 8,
   },
-  {
-    title: "Naik Level 10",
-    value: 10,
-  },
 ]
 
